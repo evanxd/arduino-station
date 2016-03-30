@@ -4,6 +4,7 @@
 String SERVER_ADDRESS = "127.0.0.1";
 int SERVER_PORT = 8080;
 String SENSOR_KEY = "sensorKey";
+String API_KEY = "apiKey";
 
 HttpClient http;
 http_header_t headers[] = {
@@ -70,7 +71,7 @@ void loop() {
     request.path = "/sensors/" + SENSOR_KEY + "/data";
     String pm25String;
     pm25String = pm25;
-    request.body = "pm25Index=" + pm25String;
+    request.body = "pm25Index=" + pm25String + "&apiKey=" + API_KEY;
 
     http.post(request, response, headers);
     Serial.print("Application>\tResponse status: ");
