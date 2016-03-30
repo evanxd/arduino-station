@@ -1,6 +1,6 @@
-long pm10 = 0;
-long pm25 = 0;
-long pm100 = 0;
+unsigned int pm10 = 0;
+unsigned int pm25 = 0;
+unsigned int pm100 = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -46,5 +46,5 @@ void loop() {
   }
   while(Serial1.available()) Serial1.read();
   Serial.println(" }");
-  delay(1000);
+  delay(5000);
 }
