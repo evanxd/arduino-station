@@ -1,3 +1,15 @@
+#include "application.h"
+#include "HttpClient/HttpClient.h"
+
+HttpClient http;
+http_header_t headers[] = {
+  { "Content-Type", "application/x-www-form-urlencoded" },
+  { "Accept" , "application/json" },
+  { NULL, NULL } // NOTE: Always terminate headers will NULL
+};
+http_request_t request;
+http_response_t response;
+
 unsigned int pm10 = 0;
 unsigned int pm25 = 0;
 unsigned int pm100 = 0;
@@ -46,5 +58,21 @@ void loop() {
   }
   while(Serial1.available()) Serial1.read();
   Serial.println(" }");
+
+  if (pm10 != 0 || pm25 != 0 || pm100 != 0) {
+    Serial.println("Application>\tStart of Loop.");
+    request.hostname = "127.0.0.1";
+    request.port = 8080;
+    request.path = "/sensors/56f9dabaf95396dd045eb025/data";
+    String pm25String;
+    pm25String = pm25;
+    request.body = "pm25Index=" + pm25String;
+
+    http.post(request, response, headers);
+    Serial.print("Application>\tResponse status: ");
+    Serial.println(response.status);
+    Serial.print("Application>\tHTTP Response Body: ");
+    Serial.println(response.body);
+  }
   delay(5000);
 }
