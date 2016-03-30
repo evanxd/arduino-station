@@ -1,2 +1,2 @@
-# photon-station
-The sensor station build by Particle Photon board.
+# Arduino Station
+The sensor station built by Arduino.
