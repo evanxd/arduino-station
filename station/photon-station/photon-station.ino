@@ -1,4 +1,3 @@
-#include "application.h"
 #include "HttpClient/HttpClient.h"
 
 String SERVER_ADDRESS = "127.0.0.1";
