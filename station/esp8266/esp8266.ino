@@ -1,10 +1,3 @@
-/**
- * BasicHTTPClient.ino
- *
- *  Created on: 24.05.2015
- *
- */
-
 #include <Arduino.h>
 
 #include <ESP8266WiFi.h>
@@ -12,18 +5,37 @@
 
 #include <ESP8266HTTPClient.h>
 
+#include <DNSServer.h>
+#include <ESP8266WebServer.h>
+#include <WiFiManager.h>         //https://github.com/tzapu/WiFiManager
+
 //#define USE_SERIAL Serial
 #define PM_SERIAL Serial
-#define SSID ""
-#define PASS ""
+//#define SSID ""
+//#define PASS ""
+#define API "http://api.sensorweb.io/sensors/"
 #define SENSOR_KEY ""
 #define API_KEY ""
-#define API "http://api.sensorweb.io/sensors/"
 
 ESP8266WiFiMulti WiFiMulti;
 
 void setup() {
     PM_SERIAL.begin(9600);
+    WiFiManager wifiManager;
+    //reset saved settings
+//    wifiManager.resetSettings();
+
+    //set custom ip for portal
+    //wifiManager.setAPConfig(IPAddress(10,0,1,1), IPAddress(10,0,1,1), IPAddress(255,255,255,0));
+
+    //fetches ssid and pass from eeprom and tries to connect
+    //if it does not connect it starts an access point with the specified name
+    //here  "AutoConnectAP"
+    //and goes into a blocking loop awaiting configuration
+    wifiManager.autoConnect("SensorWebAP");
+    //or use this for auto generated name ESP + ChipID
+    //wifiManager.autoConnect();
+
 //    USE_SERIAL.begin(115200);
    // USE_SERIAL.setDebugOutput(true);
 
@@ -31,13 +43,13 @@ void setup() {
 //    USE_SERIAL.println();
 //    USE_SERIAL.println();
 
-    for(uint8_t t = 4; t > 0; t--) {
+//    for(uint8_t t = 4; t > 0; t--) {
 //        USE_SERIAL.printf("[SETUP] WAIT %d...\n", t);
 //        USE_SERIAL.flush();
-        delay(1000);
-    }
+//        delay(1000);
+//    }
 
-    WiFiMulti.addAP(SSID, PASS);
+//    WiFiMulti.addAP(SSID, PASS);
 
 }
 
