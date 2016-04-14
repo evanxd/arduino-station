@@ -13,9 +13,9 @@
 #define PM_SERIAL Serial
 //#define SSID ""
 //#define PASS ""
-#define API "http://api.sensorweb.io/sensors/"
-#define SENSOR_KEY ""
-#define API_KEY ""
+String SENSOR_ID = "";
+String API_KEY = "";
+String API = "http://api.sensorweb.io/sensors/" + SENSOR_ID + "/data";
 
 ESP8266WiFiMulti WiFiMulti;
 
@@ -53,11 +53,11 @@ void setup() {
 
 }
 
-String load() {
+int *load() {
   unsigned int pm10 = 0;
   unsigned int pm25 = 0;
   unsigned int pm100 = 0;
-  String json = "";
+  int result[] = {-1, -1, -1};
   int index = 0;
   char value;
   char previousValue;
@@ -73,38 +73,28 @@ String load() {
     }
     else if (index == 5) {
       pm10 = 256 * previousValue + value;
-      json += "{ ";
-      json += "\"pm10\": ";
-      json += pm10;
-      json += ", ";
+      result[0] = pm10;
     }
     else if (index == 7) {
       pm25 = 256 * previousValue + value;
-      json += "\"pm25\": ";
-      json += pm25;
-      json += ", ";
+      result[1] = pm10;
     }
     else if (index == 9) {
       pm100 = 256 * previousValue + value;
-      json += "\"pm100\": ";
-      json += pm100;
+      result[2] = pm10;
     } else if (index > 15) {
       break;
     }
     index++;
   }
   while(PM_SERIAL.available()) PM_SERIAL.read();
-  if (0 == json.length()) {
-    return "";
-  }
-  json += " }";
-  return json;
+  return result;
 }
 
 void loop() {
-    String json = load();
+    int* pm = load();
     // wait for WiFi connection
-    if(json.length() > 0 && WiFiMulti.run() == WL_CONNECTED) {
+    if(pm[1] >= 0 && WiFiMulti.run() == WL_CONNECTED) {
 
         HTTPClient http;
 
@@ -115,8 +105,8 @@ void loop() {
 
 //        USE_SERIAL.print("[HTTP] POST...\n");
         // start connection and send HTTP header
-        http.addHeader("Content-Type", "application/json");
-        int httpCode = http.POST(json);
+        http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        int httpCode = http.POST("pm2_5=" + String(pm[1]) + "&api_key=" + API_KEY);
 
         // httpCode will be negative on error
         if(httpCode > 0) {

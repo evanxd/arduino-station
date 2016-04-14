@@ -1,20 +1,22 @@
 #include <SoftwareSerial.h>
 #define SSID ""
 #define PASS ""
-#define DST_IP "localhost"
-#define PORT "3000"
-#define REQ "POST / HTTP/1.0\r\nContent-Length: "
-#define REQ2 "\r\nContent-Type: application/json\r\n\r\n"
+#define SENSOR_ID ""
+#define API_KEY ""
+#define HOST "api.sensorweb.io"
+#define PORT "80"
+#define REQ(x) "POST /sensors/"x"/data HTTP/1.0\r\nContent-Length: "
+#define REQ2 "\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n"
 //#define REQ = "GET / HTTP/1.0\r\n\r\n"
 //SoftwareSerial dbgSerial(10, 11); // RX, TX
-SoftwareSerial pmSerial(10, 11); // RX, TX
+SoftwareSerial PM_SERIAL(10, 11); // RX, TX
 
 void setup()
 {
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   Serial.setTimeout(5000);
-  pmSerial.begin(9600);
+  PM_SERIAL.begin(9600);
   // dbgSerial.begin(9600); //can't be faster than 19200 for softserial
   // dbgSerial.println("ESP8266 Demo");
   //test if the module is ready
@@ -52,21 +54,22 @@ void setup()
 }
 void loop()
 {
-  String json = load();
-  if (0 == json.length()) {
+  int *pm = load();
+  if (pm[1] < 0) {
     return;
   }
+  String body = "pm2_5=" + String(pm[1]) + "&api_key=" + API_KEY;
   String cmd = "AT+CIPSTART=\"TCP\",\"";
-  cmd += DST_IP;
+  cmd += HOST;
   cmd += "\",";
   cmd += PORT;
   Serial.println(cmd);
   // dbgSerial.println(cmd);
   if(Serial.find("Error")) return;
-  cmd = REQ;
-  cmd += json.length();
+  cmd = REQ(SENSOR_ID);
+  cmd += body.length();
   cmd += REQ2;
-  cmd += json;
+  cmd += body;
   Serial.print("AT+CIPSEND=");
   Serial.println(cmd.length());
   if(Serial.find(">"))
@@ -113,17 +116,17 @@ boolean connectWiFi()
   }
 }
 
-String load() {
+int *load() {
   unsigned int pm10 = 0;
   unsigned int pm25 = 0;
   unsigned int pm100 = 0;
-  String json = "";
+  int result[] = {-1, -1, -1};
   int index = 0;
   char value;
   char previousValue;
 
-  while (pmSerial.available()) {
-    value = pmSerial.read();
+  while (PM_SERIAL.available()) {
+    value = PM_SERIAL.read();
     if ((index == 0 && value != 0x42) || (index == 1 && value != 0x4d)){
       break;
     }
@@ -133,30 +136,20 @@ String load() {
     }
     else if (index == 5) {
       pm10 = 256 * previousValue + value;
-      json += "{ ";
-      json += "\"pm10\": ";
-      json += pm10;
-      json += ", ";
+      result[0] = pm10;
     }
     else if (index == 7) {
       pm25 = 256 * previousValue + value;
-      json += "\"pm25\": ";
-      json += pm25;
-      json += ", ";
+      result[1] = pm10;
     }
     else if (index == 9) {
       pm100 = 256 * previousValue + value;
-      json += "\"pm100\": ";
-      json += pm100;
+      result[2] = pm10;
     } else if (index > 15) {
       break;
     }
     index++;
   }
-  while(pmSerial.available()) pmSerial.read();
-  if (0 == json.length()) {
-    return "";
-  }
-  json += " }";
-  return json;
+  while(PM_SERIAL.available()) PM_SERIAL.read();
+  return result;
 }
