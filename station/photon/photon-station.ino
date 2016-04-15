@@ -1,3 +1,4 @@
+#include "application.h"
 #include "HttpClient/HttpClient.h"
 
 String SENSOR_KEY = "";
