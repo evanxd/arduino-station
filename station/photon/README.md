@@ -50,10 +50,8 @@ Login with your email and password
 particle login
 ```
 
-Change the `SENSOR_ID` and `API_KEY`
-
 Make sure you `cd` into the `arduino-station/station/photon` directory,
-Change the `SENSOR_ID` and `API_KEY` in `photon-station.ino`
+change the `SENSOR_ID` and `API_KEY` in `photon-station.ino`
 and flash code with following command:
 ```
 particle flash {your_photon_name} ./*
