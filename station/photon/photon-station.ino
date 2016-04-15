@@ -71,7 +71,7 @@ void loop() {
     request.path = "/sensors/" + SENSOR_ID + "/data";
     String pm25String;
     pm25String = pm25;
-    request.body = "pm2_5=" + pm25String + "&api_key=" + API_KEY;
+    request.body = "pm25Index=" + pm25String + "&apiKey=" + API_KEY;
 
     http.post(request, response, headers);
     Serial.print("Application>\tResponse status: ");
