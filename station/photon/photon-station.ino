@@ -1,7 +1,7 @@
 #include "application.h"
 #include "HttpClient/HttpClient.h"
 
-String SENSOR_KEY = "";
+String SENSOR_ID = "";
 String API_KEY = "";
 String SERVER_ADDRESS = "api.sensorweb.io";
 int SERVER_PORT = 80;
@@ -68,7 +68,7 @@ void loop() {
     Serial.println("Application>\tStart of Loop.");
     request.hostname = SERVER_ADDRESS;
     request.port = SERVER_PORT;
-    request.path = "/sensors/" + SENSOR_KEY + "/data";
+    request.path = "/sensors/" + SENSOR_ID + "/data";
     String pm25String;
     pm25String = pm25;
     request.body = "pm2_5=" + pm25String + "&api_key=" + API_KEY;
