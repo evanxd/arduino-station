@@ -1,5 +1,4 @@
-#include "application.h"
-#include "HttpClient/HttpClient.h"
+#include "HttpClient.h"
 
 String SENSOR_ID = "[YOUR_SENSOR_ID]";
 String API_KEY = "[YOUR_API_KEY]";
