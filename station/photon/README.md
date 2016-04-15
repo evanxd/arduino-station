@@ -32,7 +32,7 @@ Change the `SENSOR_ID` and `API_KEY` to those you get from [SensorWeb dashboard]
 
 Make sure your photon is connected and breathing cyan.
 
-Click on **Devices** button in https://build.particle.io, and start the device you want to flash.
+Click on **Devices** button in https://build.particle.io, and star the device you want to flash.
 
 Click **Flash** button, if it's blinking purple, and reboot to breathing cyan after a while, it should be working properly.
 
