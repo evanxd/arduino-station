@@ -11,11 +11,80 @@ ESP8266 Arduino Setup Instructions
 - 1k resistors x 3
 - Jump wires
 
+## Prepare Software Environment
+
+Install [Arduino IDE][arduino-download] and follow this [installation guide][esp8266-install] to install ESP8266 dependencies in Arduino IDE.
+
+If your computer can't detect your USB 2 TTL Adapter when plugged in, try to install it's official driver. 
+Below are driver download links for supported adapters:
+* [PL2303 Driver][PL2303]
+* [FT232RL Driver][FT232RL]
+* [CP2102 Driver][CP2102]
+
 ## Step 1: Wiring ESP8266
 
-## Step 2: Configure `API_KEY` and `SENSOR_ID`
+USB TTL Adapter Pins| ESP8266 Pins
+--- | -----
+3V3 | VCC
+GND | GND
+RXD | TXD
+TXD | RXD
+3V3 | CH_PD (with resistor)
+3V3 | RESET (with resistor)
+GND | GPIO0
+GND | GPIO15 (only certain model have this)
 
-## Step 2: Flash Firmware
+
+## Step 2: Configure `API_KEY`, `SENSOR_ID` and Flash Firmware
+
+Open Arduino IDE, paste below code into the IDE:
+https://github.com/sensor-web/arduino-station/blob/master/station/esp8266/esp8266-station.ino
+
+Change the `API_KEY` and `SENSOR_ID` to those you get from [SensorWeb dashboard][sensorweb-profile].
+
+Click the **Upload** button and wait until it's done.
 
 ## Step 3: Connect Sensor and Get it Running
 
+Unplug TX/RX between USB TTL Adapter and ESP8266,
+Plug GPIO0 to 3V3.
+USB TTL Adapter Pins| ESP8266 Pins
+--- | ----
+3V3 | VCC
+GND | GND
+3V3 | CH_PD (with resistor)
+3V3 | RESET (with resistor)
+3V3 | GPIO0 (with resistor)
+GND | GPIO15 (only certain model have this)
+
+Plug TX/RX between PM Sensor and ESP8266.
+PM Sensor Pins| ESP8266 Pins
+--- | ----
+RXD | TXD
+TXD | RXD
+
+Plug 5V/GND from USB TTL Adapter to PM Sensor
+USB TTL Adapter Pins| PM Sensor Pins
+--- | ----
+5V  | VCC
+GND | GND
+
+Finally, power on your USB TTL Adapter to make it work.
+
+## Step 4: Setup Wifi
+
+If it didn't connect to the wifi before, it will turn into SoftAP mode automatically. 
+
+Connect to `SensorWebAP` SSID using your PC or smartphone, then a popup will show up for you to enter your wifi credentials. It will reboot after submit.
+
+## Voilà!
+
+Go back to [SensorWeb dashboard][sensorweb-profile] to see your live data.
+
+
+[arduino-download]: https://www.arduino.cc/en/Main/Software
+[esp8266-install]: http://esp8266.github.io/Arduino/versions/2.1.0/doc/installing.html
+[PL2303]: http://goo.gl/KuqY4h
+[CP2102]: http://goo.gl/jSnHO0
+[FT232RL]: http://goo.gl/IYHhQI
+[sensorweb-profile]: http://sensorweb.io/profile
