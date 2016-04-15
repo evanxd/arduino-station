@@ -9,7 +9,7 @@ HttpClient http;
 http_header_t headers[] = {
   { "Content-Type", "application/x-www-form-urlencoded" },
   { "Accept" , "application/json" },
-  { NULL, NULL } // NOTE: Always add the NULL object in the end of the headers.
+  { NULL, NULL } // Always add the NULL object in the end of the headers.
 };
 http_request_t request;
 http_response_t response;
