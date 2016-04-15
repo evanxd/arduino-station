@@ -48,6 +48,7 @@ Click the **Upload** button and wait until it's done.
 
 Unplug TX/RX between USB TTL Adapter and ESP8266,
 Plug GPIO0 to 3V3.
+
 USB TTL Adapter Pins| ESP8266 Pins
 --- | ----
 3V3 | VCC
@@ -58,12 +59,14 @@ GND | GND
 GND | GPIO15 (only certain model have this)
 
 Plug TX/RX between PM Sensor and ESP8266.
+
 PM Sensor Pins| ESP8266 Pins
 --- | ----
 RXD | TXD
 TXD | RXD
 
 Plug 5V/GND from USB TTL Adapter to PM Sensor
+
 USB TTL Adapter Pins| PM Sensor Pins
 --- | ----
 5V  | VCC
@@ -76,6 +79,8 @@ Finally, power on your USB TTL Adapter to make it work.
 If it didn't connect to the wifi before, it will turn into SoftAP mode automatically. 
 
 Connect to `SensorWebAP` SSID using your PC or smartphone, then a popup will show up for you to enter your wifi credentials. It will reboot after submit.
+
+It should begin transmitting data now!
 
 ## Voilà!
 
