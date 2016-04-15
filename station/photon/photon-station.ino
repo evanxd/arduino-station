@@ -62,16 +62,15 @@ void loop() {
   Serial.println(" }");
 
   if (pm10 != 0 && pm25 != 0 && pm100 != 0) {
-    Serial.println("Application>\tStart of Loop.");
     request.hostname = SERVER_ADDRESS;
     request.port = SERVER_PORT;
     request.path = "/sensors/" + SENSOR_ID + "/data";
     request.body = "pm25Index=" + String(pm25) + "&apiKey=" + API_KEY;
 
     http.post(request, response, headers);
-    Serial.print("Application>\tResponse status: ");
+    Serial.print("Response status: ");
     Serial.println(response.status);
-    Serial.print("Application>\tHTTP Response Body: ");
+    Serial.print("HTTP Response Body: ");
     Serial.println(response.body);
   }
   delay(5000);
