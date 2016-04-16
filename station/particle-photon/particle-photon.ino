@@ -1,9 +1,5 @@
+#include "SensorWebConfig.h"
 #include "HttpClient.h"
-
-String SENSOR_ID = "[YOUR_SENSOR_ID]";
-String API_KEY = "[YOUR_API_KEY]";
-String SERVER_ADDRESS = "127.0.0.1";
-int SERVER_PORT = 3000;
 
 HttpClient http;
 http_header_t headers[] = {
