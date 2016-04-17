@@ -69,5 +69,5 @@ void loop() {
     Serial.print("HTTP Response Body: ");
     Serial.println(response.body);
   }
-  delay(5000);
+  delay(SAMPLING_RATE);
 }
