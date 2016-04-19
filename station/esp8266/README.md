@@ -4,16 +4,23 @@ ESP8266 Arduino Setup Instructions
 ## Hardware & Accessories to Prepare in Advance
 
 - ESP8266
+    + ESP-01 is more breadboard-friendly, but less pin functions.
+    + ESP-12 have more pin functions available, including an ADC, but it's a bit difficult to wiring with breadboard.
+    + Both above would work with PM Sensor in this guide, choose according to your specific need.
 - PM Sensor
+    + Currently only tested with [PMS3003][PMS3003]
 - USB 2 TTL Adapter
     + PL2303/CP2102/FT232RL based adapters will work
     + Need to have both 5V and 3.3V output since PM Sensor only accept 5V and ESP8266 requires 3.3V
+- Breadboard x 1
 - 1k resistors x 3
 - Jump wires
 
 ## Prepare Software Environment
 
 Install [Arduino IDE][arduino-download] and follow this [installation guide][esp8266-install] to install ESP8266 dependencies in Arduino IDE.
+
+Install [WifiManger][wifi-manager] through Arduino Library Manager.
 
 If your computer can't detect your USB 2 TTL Adapter when plugged in, try to install it's official driver. 
 Below are driver download links for supported adapters:
@@ -45,6 +52,8 @@ Change the `API_KEY` and `SENSOR_ID` to those you get from [SensorWeb dashboard]
 Click the **Upload** button and wait until it's done.
 
 ## Step 3: Connect Sensor and Get it Running
+
+Take the PM Sensor for example, connect it to your ESP8266 like this:
 
 Unplug TX/RX between USB TTL Adapter and ESP8266,
 Plug GPIO0 to 3V3.
@@ -86,8 +95,9 @@ It should begin transmitting data now!
 
 Go back to [SensorWeb dashboard][sensorweb-profile] to see your live data.
 
-
+[PMS3003]: https://goo.gl/CIVGjF
 [arduino-download]: https://www.arduino.cc/en/Main/Software
+[wifi-manager]: https://github.com/tzapu/WiFiManager#quick-start
 [esp8266-install]: http://esp8266.github.io/Arduino/versions/2.1.0/doc/installing.html
 [PL2303]: http://goo.gl/KuqY4h
 [CP2102]: http://goo.gl/jSnHO0

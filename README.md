@@ -19,14 +19,14 @@ There are various ways to enable internet connection on Arduino-like boards, eit
   - Compact wifi module with Arduino-like capabilities
   - Integrated well with Arduino IDE
   - Useful libraries like http server/client, wifi manager, OTA...
-  - 1MB ~ 4MB flash depends on the hardware version
+  - 1MB ~ 4MB flash depends on the hardware model
   - $5 USD
   - Wiring difficulty: a little complex
   - [Setup instructions >>][esp-setup]
 3. **Arduino + ESP8266 Serial Wifi module** 
   - Send AT commands in Arduino firmware to control wifi module via serial pins
   - 32KB flash
-  - $27 USD (clones could be much cheaper)
+  - $27 USD (Using clones could be much cheaper)
   - Wiring difficulty: a little complex
   - [Setup instructions >>][esp-serial-setup]
 
