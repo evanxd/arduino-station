@@ -65,6 +65,8 @@ and flash code with following command:
 particle flash {your_photon_name} ./*
 ```
 
+If it's blinking purple, and reboot to breathing cyan after a while, it should be working properly.
+
 ## Voilà!
 
 Go back to [SensorWeb dashboard][sensorweb-profile] to see your live data.
