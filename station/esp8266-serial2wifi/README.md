@@ -61,6 +61,7 @@ And power on Arduino to get it up and running.
 
 Go back to [SensorWeb dashboard][sensorweb-profile] to see your live data.
 
+[arduino-download]: https://www.arduino.cc/en/Main/Software
 [step-3]: #step-3-connect-esp8266-serial-wifi-module
 [PMS3003]: https://goo.gl/CIVGjF
 [sensorweb-profile]: http://sensorweb.io/profile
