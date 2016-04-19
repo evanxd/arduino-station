@@ -46,6 +46,6 @@ Since our first initiative is to build a PM2.5 sensor network, we only have one 
 
 [PMS3003]: https://goo.gl/CIVGjF
 [aqicn-measurment]: http://aqicn.org/sensor/
-[photon-setup]: https://github.com/sensor-web/arduino-station/tree/master/station/photon
+[photon-setup]: https://github.com/sensor-web/arduino-station/tree/master/station/particle-photon
 [esp-setup]: https://github.com/sensor-web/arduino-station/tree/master/station/esp8266
 [esp-serial-setup]: https://github.com/sensor-web/arduino-station/tree/master/station/esp8266-serial2wifi
