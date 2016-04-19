@@ -69,6 +69,7 @@ particle flash {your_photon_name} ./*
 
 Go back to [SensorWeb dashboard][sensorweb-profile] to see your live data.
 
+[PMS3003]: https://goo.gl/CIVGjF
 [photon-setup]: https://docs.particle.io/guide/getting-started/start/photon/#step-1-power-on-your-device
 [sensorweb-profile]: http://sensorweb.io/profile
 [nodejs]: https://nodejs.org/
