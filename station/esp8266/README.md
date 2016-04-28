@@ -42,12 +42,12 @@ GND | GPIO0
 GND | GPIO15 (only certain model have this)
 
 
-## Step 2: Configure `API_KEY`, `SENSOR_ID` and Flash Firmware
+## Step 2: Configure WiFi, `API_KEY`, `SENSOR_ID` and Flash Firmware
 
 Open Arduino IDE, paste below code into the IDE:
 https://github.com/sensor-web/arduino-station/blob/master/station/esp8266/esp8266-station.ino
 
-Change the `API_KEY` and `SENSOR_ID` to those you get from [SensorWeb dashboard][sensorweb-profile].
+Change the `SSID` and `PASS` to connect to your wifi. Change `API_KEY` and `SENSOR_ID` to those you get from [SensorWeb dashboard][sensorweb-profile].
 
 Click the **Upload** button and wait until it's done.
 
@@ -74,22 +74,14 @@ PM Sensor Pins| ESP8266 Pins
 RXD | TXD
 TXD | RXD
 
-Plug 5V/GND from USB TTL Adapter to PM Sensor
+Plug 5V/GND from USB TTL Adapter or other power source to PM Sensor
 
-USB TTL Adapter Pins| PM Sensor Pins
+Power Source| PM Sensor Pins
 --- | ----
 5V  | VCC
 GND | GND
 
 Finally, power on your USB TTL Adapter to make it work.
-
-## Step 4: Setup Wifi
-
-If it didn't connect to the wifi before, it will turn into SoftAP mode automatically. 
-
-Connect to `SensorWebAP` SSID using your PC or smartphone, then a popup will show up for you to enter your wifi credentials. It will reboot after submit.
-
-It should begin transmitting data now!
 
 ## Voilà!
 
