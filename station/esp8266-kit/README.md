@@ -1,5 +1,4 @@
-ESP8266 Arduino Setup Instructions
-ESP8266 Arduino Setup Instructions
+ESP8266 Arduino Kit Setup Instructions
 ==================================
 
 ## Hardware & Accessories to Prepare in Advance
@@ -42,17 +41,17 @@ TXD | RXD
 GND | GPIO0
 GND | GPIO15 (only certain model have this)
 
+## Step 2: Flash Firmware
 
-## Step 2: Configure WiFi, `API_KEY`, `SENSOR_ID` and Flash Firmware
+Clone this repo:
+```
+git clone https://github.com/sensor-web/arduino-station/
+```
 
-Open Arduino IDE, paste below code into the IDE:
-https://github.com/sensor-web/arduino-station/blob/master/station/esp8266/esp8266.ino
+Open `station/esp8266-kit/esp8266-kit.ino` from Arduino IDE.
 
-Change the `SSID` and `PASS` to connect to your wifi. 
+Click the **Upload** button to flash firmware and wait until it's done.
 
-Change `API_KEY` and `SENSOR_ID` to those you get from [SensorWeb dashboard][sensorweb-profile].
-
-Click the **Upload** button and wait until it's done.
 
 ## Step 3: Connect Sensor and Get it Running
 
@@ -84,7 +83,17 @@ Power Source| PM Sensor Pins
 5V  | VCC
 GND | GND
 
-Finally, power on your USB TTL Adapter to make it work.
+## Step 4: Setup Wifi and API Key
+
+Power it on.
+
+You'll see a new AP called SensorWeb-XXXXXX (XXXXXX represents a hex string).
+
+Connect to it, a captive portal will pop out.
+
+Enter your wifi credentials, API Key, Sensor ID, and click **Save**.
+
+Wait for it to reboot.
 
 ## Voilà!
 
