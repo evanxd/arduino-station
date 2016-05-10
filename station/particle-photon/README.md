@@ -39,7 +39,7 @@ Get in `HTTPCLIENT` library detail, and click on **INCLUDE IN APP**.
 
 Go back to the app you just created, and paste following code inside the ino file.
 
-https://github.com/sensor-web/arduino-station/blob/master/station/photon/photon-station.ino
+https://github.com/sensor-web/arduino-station/tree/master/station/particle-photon/particle-photon.ino
 
 Change the `SENSOR_ID` and `API_KEY` to those you get from [SensorWeb dashboard][sensorweb-profile].
 
