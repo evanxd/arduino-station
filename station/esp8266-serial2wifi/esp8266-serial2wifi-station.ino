@@ -58,7 +58,7 @@ void loop()
   if (pm[1] < 0) {
     return;
   }
-  String body = "pm2_5=" + String(pm[1]) + "&api_key=" + API_KEY;
+  String body = "pm25=" + String(pm[1]) + "&apiKey=" + API_KEY;
   String cmd = "AT+CIPSTART=\"TCP\",\"";
   cmd += HOST;
   cmd += "\",";

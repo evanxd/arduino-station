@@ -43,7 +43,6 @@ void saveConfigCallback () {
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
-  digitalWrite(LED_BUILTIN, HIGH);
   PM_SERIAL.begin(9600);
   // put your setup code here, to run once:
 
@@ -65,10 +64,10 @@ void setup() {
         DynamicJsonBuffer jsonBuffer;
         JsonObject& json = jsonBuffer.parseObject(buf.get());
         if (json.success()) {
-          if (API_DEBUG) {
+//          if (API_DEBUG) {
             strcpy(api_server, json["api_server"]);
             strcpy(api_port, json["api_port"]);
-          }
+//          }
           strcpy(api_key, json["api_key"]);
           strcpy(sensor_id, json["sensor_id"]);
 
@@ -105,12 +104,12 @@ void setup() {
   wifiManager.addParameter(&custom_sensor_id);
   wifiManager.addParameter(&custom_api_key);
 
-  if (API_DEBUG) {
+//  if (API_DEBUG) {
     WiFiManagerParameter label_server_cfg("<br><br><label>Server Config:</label>");
     wifiManager.addParameter(&label_server_cfg);
     wifiManager.addParameter(&custom_api_server);
     wifiManager.addParameter(&custom_api_port);
-  }
+//  }
   
   if (DATA_RESET) {
     //reset settings - for testing
@@ -143,10 +142,10 @@ void setup() {
   //if you get here you have connected to the WiFi
 
   //read updated parameters
-  if (API_DEBUG) {
+//  if (API_DEBUG) {
     strcpy(api_server, custom_api_server.getValue());
     strcpy(api_port, custom_api_port.getValue());
-  }
+//  }
   strcpy(api_key, custom_api_key.getValue());
   strcpy(sensor_id, custom_sensor_id.getValue());
 
@@ -170,7 +169,6 @@ void setup() {
   //compose API url
   api += String(api_server) + ":" + String(api_port) + "/sensors/" + String(sensor_id) + "/data";
 
-  digitalWrite(LED_BUILTIN, LOW);
 }
 
 
@@ -205,7 +203,7 @@ void loop() {
 
         // start connection and send HTTP header
         http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-        int httpCode = http.POST("pm2_5=" + String(pm2_5) + "&api_key=" + String(api_key));
+        int httpCode = http.POST("pm25=" + String(pm2_5) + "&apiKey=" + String(api_key));
 
         // httpCode will be negative on error
         if(httpCode > 0) {
