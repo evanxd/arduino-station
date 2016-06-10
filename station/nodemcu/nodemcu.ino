@@ -17,6 +17,8 @@ HTTPClient http;
 void setup() {
   Serial.begin(9600);
 
+  Serial.println("Mac Address: " + WiFi.macAddress());
+
   WiFi.begin(SSID, PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
